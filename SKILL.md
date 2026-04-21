@@ -1,6 +1,6 @@
 ---
 name: json-crud
-description: Use this skill to read, create, update, or delete fields inside JSON files — especially when the JSON is large enough that reading the whole file would burn context. The workflow is two-step: first run inspect.py for a compact structure summary (keys, types, array lengths, sample values), then use get.py / set.py / delete.py to touch only the fields you care about.
+description: "Use this skill to read, create, update, or delete fields inside JSON files — especially when the JSON is large enough that reading the whole file would burn context. The workflow is two-step: first run inspect.py for a compact structure summary (keys, types, array lengths, sample values), then use get.py / set.py / delete.py to touch only the fields you care about."
 ---
 
 # json-crud
