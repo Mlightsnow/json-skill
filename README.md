@@ -23,6 +23,44 @@ Agents that work with JSON face a dilemma:
 
 The agent-facing documentation lives in [`SKILL.md`](./SKILL.md).
 
+## Why not just `jq` or a `python3 -c` one-liner?
+
+Fair question. For pure get / set / delete, they work:
+
+```bash
+jq '.users[0].name' file.json                                    # read
+jq '.users[0].name = "Alice"' file.json > tmp && mv tmp file.json  # update
+jq 'del(.users[0].email)' file.json > tmp && mv tmp file.json      # delete
+```
+
+So the get / set / delete scripts here are really just an **agent-friendly
+CLI wrapper** over what you could always do by hand. The value they add is
+ergonomic, not capability:
+
+| What the wrapper adds over `jq` / `python3 -c`             |
+|------------------------------------------------------------|
+| Fixed 4-verb interface — no per-call quoting gymnastics    |
+| Atomic writes (temp file + rename) so failed edits can't truncate the original |
+| Consistent error messages (`key 'x' not found at a.b`)     |
+| Unified path syntax across inspect / get / set / delete    |
+| Auto-discovered by Claude Code via `SKILL.md`              |
+
+**The thing you can't easily get from a one-liner is `inspect.py`.** Producing
+a compact, depth-limited, homogeneous-array-collapsed structure summary with
+sample values takes ~180 lines of Python. Equivalents with `jq` alone:
+
+| You want                                | `jq` gives you                          |
+|-----------------------------------------|-----------------------------------------|
+| The whole shape                         | `jq .` — dumps everything (same problem)|
+| Top-level keys only                     | `jq 'keys'` — flat, one level           |
+| Types per key                           | `jq 'map_values(type)'` — one level     |
+| Every path                              | `jq 'paths'` — no folding, explodes     |
+| Compact, recursive, folded schema       | — no off-the-shelf answer               |
+
+That last row is the real reason this skill exists. `get.py` / `set.py` /
+`delete.py` are kept alongside it mostly for consistency and atomicity — if
+you live in `jq` already, feel free to use it for those three.
+
 ## Install
 
 Clone (or symlink) this repo into your Claude Code skills directory:
