@@ -141,4 +141,4 @@ python3 -m unittest tests.test_roundtrip -v
 
 ## License
 
-MIT (add a LICENSE file as needed).
+MIT — see [`LICENSE`](./LICENSE).
