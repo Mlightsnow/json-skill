@@ -1,4 +1,4 @@
-# json-crud
+# json-skill
 
 A Claude Code **Skill** for safely and efficiently doing CRUD (Create / Read /
 Update / Delete) operations on JSON files — especially large ones where
