@@ -1,0 +1,56 @@
+{
+  "version": "2.1.0",
+  "created_at": "2026-04-21T12:00:00Z",
+  "description": "A fictional CRM export used as json-crud demo data. Contains nested objects, a homogeneous user array, a heterogeneous events array, and a deeply nested config tree to exercise the inspect.py structure scanner.",
+  "users": [
+    {"id": 1, "name": "Alice Walker", "email": "alice@example.com", "roles": ["admin", "owner"], "meta": {"joined": "2024-01-15", "active": true, "tier": "gold"}},
+    {"id": 2, "name": "Bob Chen", "email": "bob@example.com", "roles": ["editor"], "meta": {"joined": "2024-03-02", "active": true, "tier": "silver"}},
+    {"id": 3, "name": "Carol Davis", "email": "carol@example.com", "roles": ["viewer"], "meta": {"joined": "2024-05-20", "active": false, "tier": "bronze"}},
+    {"id": 4, "name": "Dan Evans", "email": "dan@example.com", "roles": ["editor", "viewer"], "meta": {"joined": "2024-07-11", "active": true, "tier": "silver"}},
+    {"id": 5, "name": "Eve Foster", "email": "eve@example.com", "roles": ["admin"], "meta": {"joined": "2024-09-08", "active": true, "tier": "gold"}},
+    {"id": 6, "name": "Frank Green", "email": "frank@example.com", "roles": ["viewer"], "meta": {"joined": "2024-10-17", "active": true, "tier": "bronze"}},
+    {"id": 7, "name": "Grace Howard", "email": "grace@example.com", "roles": ["editor"], "meta": {"joined": "2024-11-30", "active": false, "tier": "silver"}},
+    {"id": 8, "name": "Henry Ito", "email": "henry@example.com", "roles": ["viewer", "guest"], "meta": {"joined": "2025-01-04", "active": true, "tier": "bronze"}},
+    {"id": 9, "name": "Iris Jones", "email": "iris@example.com", "roles": ["admin", "editor"], "meta": {"joined": "2025-02-22", "active": true, "tier": "gold"}},
+    {"id": 10, "name": "Jack Kim", "email": "jack@example.com", "roles": ["viewer"], "meta": {"joined": "2025-03-14", "active": true, "tier": "bronze"}}
+  ],
+  "events": [
+    "system_start",
+    42,
+    {"type": "login", "user_id": 1, "ts": "2026-04-20T09:00:00Z"},
+    true,
+    null,
+    {"type": "logout", "user_id": 1, "ts": "2026-04-20T17:30:00Z"}
+  ],
+  "config": {
+    "database": {
+      "host": "db.internal.example.com",
+      "port": 5432,
+      "credentials": {
+        "username": "app_reader",
+        "password_env": "DB_READER_PW",
+        "ssl": {
+          "enabled": true,
+          "verify": "full",
+          "ca_bundle": "/etc/ssl/certs/company.pem"
+        }
+      },
+      "pool": {"min": 2, "max": 10, "idle_timeout_sec": 60}
+    },
+    "cache": {
+      "backend": "redis",
+      "ttl_seconds": 300,
+      "nodes": ["cache-01", "cache-02", "cache-03"]
+    },
+    "features": {
+      "new_dashboard": true,
+      "beta_exports": false,
+      "dark_mode": true
+    },
+    "limits": {
+      "api_rate_per_minute": 600,
+      "max_upload_mb": 25
+    }
+  },
+  "notes.with.dots": "This top-level key has dots and must be addressed with data[\"notes.with.dots\"]"
+}
